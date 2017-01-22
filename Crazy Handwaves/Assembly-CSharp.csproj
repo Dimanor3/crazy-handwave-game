@@ -46,10 +46,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Audio\Music\MusicManager.cs" />
+     <Compile Include="Assets\Scripts\Audio\Sound\SFXManager.cs" />
      <Compile Include="Assets\Scripts\Button\Buttons.cs" />
+     <Compile Include="Assets\Scripts\EXPBar\BarScript.cs" />
+     <Compile Include="Assets\Scripts\EXPBar\Stat.cs" />
      <Compile Include="Assets\Scripts\Movement\HandMovement.cs" />
      <Compile Include="Assets\Scripts\Movement\TrumpMovement.cs" />
-     <Compile Include="Assets\Scripts\Sound\SFXManager.cs" />
+     <Compile Include="Assets\Scripts\expantion.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

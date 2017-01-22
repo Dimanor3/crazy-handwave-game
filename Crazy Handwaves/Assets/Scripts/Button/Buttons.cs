@@ -7,22 +7,25 @@ public class Buttons : MonoBehaviour {
 
 	[SerializeField] private SFXManager sfxMan;
 
-	private GameObject credits, nonCredits, pause;
+	private GameObject credits, nonCredits, pause, howToPlay;
 
 	void Awake () {
 		credits = GameObject.FindGameObjectWithTag ("Credits");
 		nonCredits = GameObject.FindGameObjectWithTag ("NonCredits");
 		pause = GameObject.FindGameObjectWithTag ("Pause");
-
-		if (sfxMan == null) {
-			sfxMan = GameObject.FindGameObjectWithTag ("SFXMan").GetComponent<SFXManager> ();
-		}
+		howToPlay = GameObject.FindGameObjectWithTag ("HowToPlay");
 	}
 
 	void Start () {
 		if (credits != null) {
 			credits.SetActive (false);
 		}
+
+		if (howToPlay != null) {
+			howToPlay.SetActive (false);
+		}
+
+		sfxMan = GameObject.FindGameObjectWithTag ("SFXMan").GetComponent<SFXManager> ();
 	}
 
 	/// <summary>
@@ -48,6 +51,10 @@ public class Buttons : MonoBehaviour {
 			nonCredits.SetActive (true);
 		}
 
+		if (howToPlay != null) {
+			howToPlay.SetActive (false);
+		}
+
 		Time.timeScale = 1f;
 		SceneManager.LoadScene ("MainMenu");
 	}
@@ -64,6 +71,10 @@ public class Buttons : MonoBehaviour {
 
 		if (nonCredits != null) {
 			nonCredits.SetActive (true);
+		}
+
+		if (howToPlay != null) {
+			howToPlay.SetActive (false);
 		}
 	}
 
@@ -94,12 +105,35 @@ public class Buttons : MonoBehaviour {
 	}
 
 	/// <summary>
+	/// How to play the game.
+	/// </summary>
+	public void HowToPlay () {
+		playButtonClick ();
+
+		if (nonCredits != null) {
+			nonCredits.SetActive (false);
+		}
+
+		if (howToPlay != null) {
+			howToPlay.SetActive (true);
+		}
+	}
+
+	/// <summary>
 	/// Starts the game.
 	/// </summary>
 	public void PlayGame () {
 		playButtonClick ();
-
+		
 		SceneManager.LoadScene ("MainGame");
+	}
+
+	public void RestartLevel () {
+		playButtonClick ();
+
+		StartCoroutine ("restart");
+
+		print (SceneManager.sceneCount);
 	}
 
 	/// <summary>
@@ -109,5 +143,13 @@ public class Buttons : MonoBehaviour {
 		if (!sfxMan.ButtonClick.isPlaying) {
 			sfxMan.ButtonClick.Play ();
 		}
+	}
+
+	IEnumerator restart () {
+		SceneManager.LoadScene ("MainMenu");
+
+		yield return new WaitForSeconds (1f);
+
+		SceneManager.LoadScene ("MainGame");
 	}
 }
