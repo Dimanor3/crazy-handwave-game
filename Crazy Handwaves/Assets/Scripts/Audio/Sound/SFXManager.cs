@@ -4,7 +4,7 @@ using System.Collections;
 public class SFXManager : MonoBehaviour {
 
 	// List of AudioSources
-	[SerializeField] private AudioSource buttonClick;
+	[SerializeField] private AudioSource buttonClick, commercial;
 
 	// Used to check if the SFX Manager already exists
 	public static SFXManager sfxManagerExists;
@@ -31,6 +31,12 @@ public class SFXManager : MonoBehaviour {
 	public AudioSource ButtonClick {
 		get {
 			return buttonClick;
+		}
+	}
+
+	public AudioSource Commercial {
+		get { 
+			return commercial;
 		}
 	}
 }
